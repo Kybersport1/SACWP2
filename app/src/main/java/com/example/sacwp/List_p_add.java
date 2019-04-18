@@ -1,6 +1,5 @@
 package com.example.sacwp;
 
-import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Driveacar extends AppCompatActivity implements AdapterView.OnItemClickListener{
+import com.example.sacwp.recycler_p_list.RecyclerItem_p;
+
+import java.util.List;
+
+public class List_p_add extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ConstraintLayout view;
     public String isCityActive;
     private Button go;
@@ -21,7 +24,7 @@ public class Driveacar extends AppCompatActivity implements AdapterView.OnItemCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driveacar);
+        setContentView(R.layout.activity_list_p_add);
         view = findViewById(R.id.cons_drive);
         view.setBackgroundResource(R.drawable.drive);
         go = findViewById(R.id.button_drive);
@@ -35,11 +38,10 @@ public class Driveacar extends AppCompatActivity implements AdapterView.OnItemCl
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editCom.getText().toString().isEmpty()){
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Оставьте пожалуйста комментарий!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+                List<RecyclerItem_p> list = SecondActivity.getList();
+                list.add(new RecyclerItem_p(isCityActive, editCom.getText().toString()));
+                SecondActivity.setList(list);
+                finish();
             }
         });
 

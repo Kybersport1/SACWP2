@@ -1,4 +1,4 @@
-package com.example.sacwp;
+package com.example.sacwp.recycler_car_marks;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sacwp.R;
+
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -16,8 +18,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private ItemClicked callback;
 
 
-    RecyclerAdapter(List<RecyclerItem> emailsPreviewList,
-                    ItemClicked callback) {
+    public RecyclerAdapter(List<RecyclerItem> emailsPreviewList,
+                           ItemClicked callback) {
         this.previewList = emailsPreviewList;
         this.callback = callback;
     }
@@ -60,7 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return holder;
     }
 
-    interface ItemClicked {
+    public interface ItemClicked {
         void itemClickedCallback(int itemPosition);
     }
 

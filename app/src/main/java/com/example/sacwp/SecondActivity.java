@@ -12,28 +12,28 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sacwp.api.NetworkService;
 import com.example.sacwp.data.City;
+import com.example.sacwp.recycler_p_list.RecyclerItem_p;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -80,8 +80,18 @@ public class SecondActivity extends AppCompatActivity {
     private ImageView img_description;
 
     private Button button_sheet;
-    //
 
+    //-----------------------------------------------------------------
+    private static List<RecyclerItem_p> list = new ArrayList<>();
+
+    public static List<RecyclerItem_p> getList() {
+        return list;
+    }
+
+    public static void setList(List<RecyclerItem_p> list) {
+        SecondActivity.list = list;
+    }
+//-------------------------------------------------------------------
 
     ConstraintLayout view;
 
@@ -131,7 +141,7 @@ public class SecondActivity extends AppCompatActivity {
                 }
                 NetworkService.getInstance()
                         .getCityApi()
-                        .getCity(result,APPID,UNITS)
+                        .getCity(result, APPID, UNITS)
                         .enqueue(new Callback<City>() {
                             @Override
                             public void onResponse(Call<City> call, Response<City> response) {
@@ -145,15 +155,15 @@ public class SecondActivity extends AppCompatActivity {
                                             break;
                                         case "Clouds":
                                             img_description.setImageResource(R.drawable.ic_cloud);
-                                            logicClouds(temp_v,logicResult);
+                                            logicClouds(temp_v, logicResult);
                                             break;
                                         case "Rain":
                                             img_description.setImageResource(R.drawable.ic_rain);
-                                            logicRain(temp_v,logicResult);
+                                            logicRain(temp_v, logicResult);
                                             break;
                                         case "Snow":
                                             img_description.setImageResource(R.drawable.ic_snow);
-                                            logicSnow(temp_v,logicResult);
+                                            logicSnow(temp_v, logicResult);
                                             break;
                                         default:
                                             logicError(logicResult);
@@ -166,7 +176,7 @@ public class SecondActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<City> call, Throwable t) {
-                                ((TextView)findViewById(R.id.temp_y)).setText("Query error");
+                                ((TextView) findViewById(R.id.temp_y)).setText("Query error");
                                 Log.d(TAG, t.getMessage());
                             }
 
@@ -196,7 +206,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bottom_sheet bottom_sheet = new Bottom_sheet();
-                bottom_sheet.show(getSupportFragmentManager(),"Info");
+                bottom_sheet.show(getSupportFragmentManager(), "Info");
             }
         });
 
@@ -243,94 +253,99 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(i_exit == 1){
+        if (i_exit == 1) {
             Toast toast = Toast.makeText(getApplicationContext(),
                     "Нажмите ещё раз для выхода!", Toast.LENGTH_SHORT);
             toast.show();
             i_exit = 2;
-        }else if(i_exit ==2) {
-            i_exit =1;
+        } else if (i_exit == 2) {
+            i_exit = 1;
             System.exit(0);
             finish();
         }
     }
 
-    private void showTemp(City city){
+    private void showTemp(City city) {
         double temp = city.getMain().getTemp();
         temp_v = temp;
         String tempist = String.valueOf(temp);
-        ((TextView)findViewById(R.id.temp_y)).setText(tempist);
+        ((TextView) findViewById(R.id.temp_y)).setText(tempist);
     }
 
-    public void logicClear(double temp,TextView textView){
-        if(temp>= 10){
+    public void logicClear(double temp, TextView textView) {
+        if (temp >= 10) {
             textView.setText(str_1);
-        }else if(temp<10 && temp >=-5){
+        } else if (temp < 10 && temp >= -5) {
             textView.setText(str_2);
-        }else if(temp<=-5){
+        } else if (temp <= -5) {
             textView.setText(str_3);
-        }else{
+        } else {
             textView.setText(str_e);
         }
     }
 
-    public void logicClouds(double temp,TextView textView){
-        if(temp>= 9){
+    public void logicClouds(double temp, TextView textView) {
+        if (temp >= 9) {
             textView.setText(str_1);
-        }else if(temp<9 && temp >=-6){
+        } else if (temp < 9 && temp >= -6) {
             textView.setText(str_2);
-        }else if(temp<=-6){
+        } else if (temp <= -6) {
             textView.setText(str_3);
-        }else{
+        } else {
             textView.setText(str_e);
         }
     }
 
-    public void logicRain(double temp,TextView textView){
-        if(temp>= 20){
+    public void logicRain(double temp, TextView textView) {
+        if (temp >= 20) {
             textView.setText(str_1);
-        }else if(temp<20 && temp >=10){
+        } else if (temp < 20 && temp >= 10) {
             textView.setText(str_2);
-        }else if(temp<=10){
+        } else if (temp <= 10) {
             textView.setText(str_3);
-        }else{
+        } else {
             textView.setText(str_e);
         }
     }
 
-    public void logicSnow(double temp,TextView textView){
-        if(temp>=10){
+    public void logicSnow(double temp, TextView textView) {
+        if (temp >= 10) {
             textView.setText(str_1);
-        }else if(temp<10 && temp >=-5){
+        } else if (temp < 10 && temp >= -5) {
             textView.setText(str_2);
-        }else if(temp<=-5){
+        } else if (temp <= -5) {
             textView.setText(str_3);
-        }else{
+        } else {
             textView.setText(str_e);
         }
     }
 
-    public void logicError(TextView textView){
+    public void logicError(TextView textView) {
         textView.setText(str_e);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.settings:
                 intent_p = new Intent(SecondActivity.this, Settings_to.class);
                 startActivity(intent_p);
                 break;
             case R.id.zp:
-                intent_p = new Intent(SecondActivity.this, Driveacar.class);
-                startActivity(intent_p);
+                if (list.size() == 0) {
+                    intent_p = new Intent(SecondActivity.this, List_p_add.class);
+                    startActivity(intent_p);
+                } else {
+                    intent_p = new Intent(SecondActivity.this, List_p.class);
+                    startActivity(intent_p);
+                }
                 break;
             case R.id.openMap:
 //                intent_p = new Intent(SecondActivity.this, MapsActivity.class);
