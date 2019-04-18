@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.sacwp.recycler_car_marks.RecyclerAdapter;
+import com.example.sacwp.recycler_car_marks.RecyclerItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,8 +127,6 @@ public class ListCar extends AppCompatActivity implements RecyclerAdapter.ItemCl
     @Override
     public void itemClickedCallback(int itemPosition) {
         Intent intent = new Intent(this, SecondActivity.class);
-        //intent.putExtra(ICO_KEY, list.get(itemPosition).getIco());
-        //intent.putExtra("sname" , getIntent().getStringExtra("fname"));
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(MARK_KEY, list.get(itemPosition).getIco());
         editor.apply();

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cons_drive"
-    tools:context=".Driveacar">
+    tools:context=".List_p_add">
 
     <TextView
         android:id="@+id/textView4"
@@ -42,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Spinner
+        android:visibility="gone"
         android:id="@+id/spinner"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
@@ -54,6 +55,20 @@
         app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="160dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editText_drive"

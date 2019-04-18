@@ -78,7 +78,7 @@ public class Settings_to extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Заполните пожалуйста поле!", Toast.LENGTH_SHORT);
                     toast.show();
-                } else if (sedan.isChecked() == false && gryz.isChecked() == false && vnedoro.isChecked() == false) {
+                } else if (!sedan.isChecked() && !gryz.isChecked() && !vnedoro.isChecked()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Выберите пожалуйста тип!", Toast.LENGTH_SHORT);
                     toast.show();

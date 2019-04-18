@@ -1,4 +1,4 @@
-package com.example.sacwp;
+package com.example.sacwp.recycler_car_marks;
 
 public class RecyclerItem {
     private String mark;
