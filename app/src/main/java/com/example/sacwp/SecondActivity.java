@@ -82,15 +82,7 @@ public class SecondActivity extends AppCompatActivity {
     private Button button_sheet;
 
     //-----------------------------------------------------------------
-    private static List<RecyclerItem_p> list = new ArrayList<>();
 
-    public static List<RecyclerItem_p> getList() {
-        return list;
-    }
-
-    public static void setList(List<RecyclerItem_p> list) {
-        SecondActivity.list = list;
-    }
 //-------------------------------------------------------------------
 
     ConstraintLayout view;
@@ -339,20 +331,10 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(intent_p);
                 break;
             case R.id.zp:
-                if (list.size() == 0) {
-                    intent_p = new Intent(SecondActivity.this, List_p_add.class);
-                    startActivity(intent_p);
-                } else {
                     intent_p = new Intent(SecondActivity.this, List_p.class);
                     startActivity(intent_p);
-                }
                 break;
             case R.id.openMap:
-//                intent_p = new Intent(SecondActivity.this, MapsActivity.class);
-//                intent_p.putExtra("result", result);
-//                intent_p.putExtra("long",longitude);
-//                intent_p.putExtra("latit",latitude);
-//                startActivity(intent_p);
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/Мойки+" + result));
                 startActivity(intent);
                 break;
